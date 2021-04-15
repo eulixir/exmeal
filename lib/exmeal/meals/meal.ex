@@ -21,7 +21,7 @@ defmodule Exmeal.Meal do
     struct
     |> cast(params, @required_params)
     |> validate_required(@required_params)
-    |> validate_length(:calories, greater_than_or_equal_to: 0)
+    |> validate_number(:calories, greater_than_or_equal_to: 0)
   end
 
 end
