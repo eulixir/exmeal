@@ -1,15 +1,19 @@
 defmodule ExmealWeb.MealsController do
   use ExmealWeb, :controller
 
-  # action_fallback FallbackController
+  alias Exmeal.Meal
 
-  # def create(conn, params) do
-  #   with {:ok, %User{} = user} <- Rockelivery.create_user(params) do
-  #     conn
-  #     |> put_status(:created)
-  #     |> render("create.json", user: user)
-  #   end
-  # end
+  alias ExmealWeb.FallbackController
+
+  action_fallback FallbackController
+
+  def create(conn, params) do
+    with {:ok, %Meal{} = meal} <- Exmeal.meal_create(params) do
+      conn
+      |> put_status(:created)
+      |> render("create.json", meal: meal)
+    end
+  end
 
   # def delete(conn, %{"id" => id}) do
   #   with {:ok, %User{}} <- Rockelivery.delete_user(id) do
