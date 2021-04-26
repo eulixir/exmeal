@@ -15,16 +15,16 @@ defmodule ExmealWeb.MealsController do
     end
   end
 
-  # def delete(conn, %{"id" => id}) do
-  #   with {:ok, %User{}} <- Rockelivery.delete_user(id) do
-  #     conn
-  #     |> put_status(:no_content)
-  #     |> text("")
-  #   end
-  # end
+  def delete(conn, %{"id" => id}) do
+    with {:ok, %Meal{}} <- Exmeal.meal_delete(id) do
+      conn
+      |> put_status(:no_content)
+      |> text("")
+    end
+  end
 
   # def show(conn, %{"id" => id}) do
-  #   with {:ok, %User{} = user} <- Rockelivery.get_user_by_id(id) do
+  #   with {:ok, %Meal{} = user} <- Exmeal.get_user_by_id(id) do
   #     conn
   #     |> put_status(:ok)
   #     |> render("user.json", user: user)
@@ -32,7 +32,7 @@ defmodule ExmealWeb.MealsController do
   # end
 
   # def update(conn, params) do
-  #   with {:ok, %User{} = user} <- Rockelivery.update_user(params) do
+  #   with {:ok, %Meal{} = user} <- Exmeal.update_user(params) do
   #     conn
   #     |> put_status(:ok)
   #     |> render("user.json", user: user)

@@ -7,4 +7,5 @@ defmodule ExmealWeb.MealsView do
       meal: meal
     }
   end
+
 end
