@@ -1,5 +1,5 @@
 defmodule Exmeal.Meals.Create do
-  alias Exmeal.{Error, Meal, Repo}
+  alias Exmeal.{Error, Repo, Meal}
 
   def call(params) do
     params
