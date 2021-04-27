@@ -3,7 +3,7 @@ defmodule Exmeal.Meal do
 
   import Ecto.Changeset
 
-  @derive {Jason.Encoder, only: [:id, :description, :date, :calories ]}
+  @derive {Jason.Encoder, only: [:id, :description, :date, :calories]}
 
   @primary_key {:id, :binary_id, autogenerate: true}
 
@@ -23,5 +23,4 @@ defmodule Exmeal.Meal do
     |> validate_required(@required_params)
     |> validate_number(:calories, greater_than_or_equal_to: 0)
   end
-
 end
