@@ -8,7 +8,6 @@ defmodule ExmealWeb.MealsController do
   action_fallback FallbackController
 
   def create(conn, params) do
-    IO.puts("bananaaaaaaaaa")
     with {:ok, %Meal{} = meal} <- Exmeal.create_meal(params) do
       conn
       |> put_status(:created)
@@ -33,8 +32,7 @@ defmodule ExmealWeb.MealsController do
   end
 
   def show(conn) do
-    IO.puts("Banana")
-    with {:ok, meal} <- Exmeal.get_meal do
+    with {:ok, meal} <- Exmeal.get_meal() do
       conn
       |> put_status(:ok)
       |> render("meal.json", meal: meal)

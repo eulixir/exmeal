@@ -13,6 +13,5 @@ defmodule Exmeal.Meals.Get do
       nil -> {:error, "Don't have register"}
       meal -> {:ok, meal}
     end
-
   end
 end

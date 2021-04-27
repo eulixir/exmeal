@@ -1,9 +1,9 @@
 defmodule Exmeal.Meals.Delete do
-  alias Exmeal.{Meal, Repo}
+  alias Exmeal.{Error, Meal, Repo}
 
   def call(id) do
     case Repo.get(Meal, id) do
-      nil -> {:error, "Meal not found"}
+      nil -> {:error, Error.build_meal_not_found_error()}
       user -> Repo.delete(user)
     end
   end
