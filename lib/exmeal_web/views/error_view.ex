@@ -1,6 +1,8 @@
 defmodule ExmealWeb.ErrorView do
   use ExmealWeb, :view
 
+  import Ecto.Changeset, only: [traverse_errors: 2]
+
   alias Ecto.Changeset
 
   # If you want to customize a particular status code
@@ -20,12 +22,8 @@ defmodule ExmealWeb.ErrorView do
     %{message: translate_errors(changeset)}
   end
 
-  def render("error.json", %{result: result}) do
-    %{message: result}
-  end
-
-  defp translate_errors(changeset) do
-    Changeset.traverse_errors(changeset, fn {msg, opts} ->
+  def translate_errors(changeset) do
+    traverse_errors(changeset, fn {msg, opts} ->
       Enum.reduce(opts, msg, fn {key, value}, acc ->
         String.replace(acc, "%{#{key}}", to_string(value))
       end)
