@@ -18,14 +18,19 @@ defmodule ExmealWeb.ErrorView do
     %{errors: %{detail: Phoenix.Controller.status_message_from_template(template)}}
   end
 
-  def render("error.json", %{result: %Changeset{} = changeset}) do
-    %{message: translate_errors(changeset)}
+  def render("error.json", %{result: %Changeset{} = result}) do
+    %{message: translate_errors(result)}
   end
+
+  def render("error.json", %{result: result}) do
+    %{message: result}
+  end
+
 
   def translate_errors(changeset) do
     traverse_errors(changeset, fn {msg, opts} ->
-      Enum.reduce(opts, msg, fn {key, value}, acc ->
-        String.replace(acc, "%{#{key}}", to_string(value))
+      Enum.reduce(opts, msg, fn {key, result}, acc ->
+        String.replace(acc, "%{#{key}}", to_string(result))
       end)
     end)
   end

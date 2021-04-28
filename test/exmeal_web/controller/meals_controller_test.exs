@@ -66,9 +66,7 @@ defmodule Exmeal.MealsControllerTest do
         |> json_response(:not_found)
 
       assert %{
-        "errors" => %{
-          "detail" => "Internal Server Error"
-        }
+        "message" => "Meal not found"
       } = response
     end
   end
@@ -98,7 +96,7 @@ defmodule Exmeal.MealsControllerTest do
         |> put(Routes.meals_path(conn, :update, id))
         |> json_response(:not_found)
 
-      assert %{"errors" => %{"detail" => "Internal Server Error"}} = response
+      assert %{"message" => "Meal not found"} = response
     end
   end
 
@@ -118,16 +116,16 @@ defmodule Exmeal.MealsControllerTest do
       assert %{"meal" => %{"calories" => 20, "date" => "2001-05-02", "description" => "Banana", "id" => _id}} = response
     end
 
-    # test "when id not exist, return an error", %{conn: conn} do
+    test "when id not exist, return an error", %{conn: conn} do
 
-    #   id = "5e694bc0-78fc-4600-bcd0-0733b7540a6e"
+      id = "5e694bc0-78fc-4600-bcd0-0733b7540a6e"
 
-    #   response =
-    #     conn
-    #     |> get(Routes.meals_path(conn, :update, id))
-    #     |> json_response(:not_found)
+      response =
+        conn
+        |> get(Routes.meals_path(conn, :update, id))
+        |> json_response(:not_found)
 
-    #   assert %{"errors" => %{"detail" => "Internal Server Error"}} = response
-    # end
+      assert %{"message" => "Meal not found"} = response
+    end
   end
 end

@@ -1,16 +1,9 @@
 defmodule Exmeal.Meals.Get do
-  alias Exmeal.{Meal, Repo}
+  alias Exmeal.{Error, Meal, Repo}
 
-  def call(id) do
+  def by_id(id) do
     case Repo.get(Meal, id) do
-      nil -> {:error, "Id not found"}
-      meal -> {:ok, meal}
-    end
-  end
-
-  def call do
-    case Repo.all(Meal) do
-      nil -> {:error, "Don't have register"}
+      nil -> {:error, Error.build_meal_not_found_error()}
       meal -> {:ok, meal}
     end
   end
